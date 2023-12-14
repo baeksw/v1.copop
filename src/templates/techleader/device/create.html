@@ -1,0 +1,233 @@
+{% extends 'layout/base.html' %}
+{% block menu_script %}<script>select_menu('.m3',1)</script>{% endblock %}
+{% block page-header-icon %}<i class="fas fa-search"></i>{% endblock %}
+
+{% block page-header %}단말기 관리{% endblock %}
+
+{% block page-subtitle %}{% endblock %}
+
+{% block main-content %}
+<form method="post" id="form">
+{% csrf_token %} 
+<div class="card">
+	<div class=" card-header d-flex justify-content-between">
+		<span>단말기 정보 등록</span>
+		<div class="row d-flex justify-content-end" style="width:200px;">
+			<a href="{% url 'device.device' %}" class="col-lg-5 btn btn-outline-dark btn-sm mr-2" id="btn-cancel" >취소</a>
+			<button class="btn btn-secondary btn-sm col-lg-6" type="button" id="btn-add-item" >저장</button>		
+		</div>
+	</div>
+
+	
+	<div class="card-body bg-light  ">
+
+		<div class="row">
+			<div class="col-lg-3 d-flex flex-row">
+				<label class="label-control font-weight-800  text-right col-lg-4">일련번호</label>
+				<input type="text" class="form-control col-lg-8" name="serial_no_value" id="id_serial_no_value"/>
+			</div>
+			<div class="col-lg-3">
+				<button class="btn btn-success label-control" type="button" id="id_add_serial_no">일련번호 추가</button>
+			</div>
+
+			<div class="col-lg-3  row">
+				<div class="col-lg-3 font-weight-800 text-right ">대리점</div>
+				<div class="col-lg-9">
+					<select class="form-control m-0" name="agency_idx" id="id_agency_idx">
+						{% for agency in agency_list %}
+							<option value="{{agency.agency_idx}}">{{agency.managed_name}}</option>
+						{% empty %}
+							<option value="-1">----</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+			<div class="col-lg-3 row ">
+				<div class="col-lg-3 font-weight-800 text-right " >딜러</div>
+				<div class="col-lg-9">
+					<select class="form-control" id="id_dealer_idx" name="dealer_idx">
+						<option>-----</option>
+					</select>
+				</div>
+			</div>
+
+		</div>
+<!-- 1 -->
+
+	</div>
+	
+	
+	<div class="card-body">
+		<div class="row">
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				{% include 'techleader/device/enter_serial.html' %}
+			</div>
+			<div class="col-lg-9">
+				{% include 'techleader/device/enter_device.html' %}
+			</div>
+		
+		</div>
+	</div>
+	
+
+</div>
+</form>
+
+{% include 'techleader/device/script.html' %}
+
+<script type="text/javascript">
+
+
+function UpdateDealerSelect(agency_idx) {
+	
+	console.log("agency=>", agency_idx)
+	this.api = "{% url 'api.dealer.all' '000' %}";
+	this.api = this.api.replace('000', agency_idx);
+		
+	this.execute = function() {
+		if (agency_idx === '-1') {
+			$('#id_dealer_idx').html('<option>----</option>')
+			$('#id_search').prop('disabled', true)
+			$('#id_download').prop('disabled', true)
+		} else {
+			$.getJSON(this.api, function(data){
+				console.log(data)
+				if (data && data.length == 0) {
+					$('#id_dealer_idx').html('<option>----</option>')
+				} 
+				var html = '';
+				$.each(data, function(idx, row ) {
+					html += `<option value="`+row.dealer_idx+`">`+row.dealer_name+`</option>`;
+				});
+				if(html !== '') {
+					$('#id_dealer_idx').html(html)
+				}
+			})
+		}
+	}
+}
+
+
+function DeviceSerialChecker() {
+	this.api = "{% url 'api.device.check.serial' '000' %}"
+	this.check = function(serial_no) {
+		this.api = this.api.replace('000', serial_no);
+		$.get(this.api, function(data) {
+			// todo : if the serial_no input be enter a serial_no 
+			console.log(data) //
+		});
+		
+	}
+
+}
+
+// todo : add-function duplicate input data 
+function onClickAddSerialNo() {
+	$("#id_add_serial_no").on('click', function(){
+		var currentSerial = $('#id_serial_no_value').val();
+		var html = `<li class="list-group-item" style="border:0px">`+currentSerial+`</li>`;
+		$('#id_serial_list').append(html);
+	})
+}
+
+
+function CreateDeviceTerm() {
+	this.api = "{% url 'api.device.create' %}"
+
+	this.execute = function() {
+		var serial_list = [];
+
+		$('#id_serial_list li').each(function(){
+			var item = $.trim($(this).text());
+			serial_list.push(item)
+		});
+		
+		var defaultValue = function (key) {
+			return $(key).val() !== null ? $(key).val()  : ''
+		}
+		
+		if ($('#id_serial_no') !== null || $('#id_serial_no') !== '') {
+			serial_list.push($('#id_serial_no').val()); // 
+		}
+
+		var formData = {
+			'serial_list' : serial_list
+			, 'dealer_idx' : $('#id_dealer_idx').val()
+	        , 'van_code' : $('#id_van_code').val()
+			, 'van_type' : $('#id_van_type').val()
+			, 'server_credit_id' : defaultValue('#id_server_credit_id')
+			, 'server_credit_ip' : defaultValue('#id_server_credit_ip')
+			, 'server_credit_port' : defaultValue('#id_server_credit_port')
+			, 'server_pre_id' : defaultValue('#id_server_pre_id')
+			, 'server_pre_ip' : defaultValue('#id_server_pre_ip')
+			, 'server_pre_port' : defaultValue('#id_server_pre_port')
+			, 'server_key_ip' : defaultValue('#id_server_key_ip')
+			, 'server_key_port' : defaultValue('#id_server_key_port')
+			, 'server_svr_ip' : defaultValue('#id_server_svr_ip')
+			, 'server_svr_port' : defaultValue('#id_server_svr_port')
+			, 'server_store_name' : defaultValue('#id_server_store_name')
+			, 'server_store_number' : defaultValue('#id_server_store_number')
+			, 'server_store_idx' : defaultValue('#id_server_store_idx')
+			, 'server_site_name' : defaultValue('#id_server_site_name')
+			, 'activation_de' : defaultValue('#id_activation_de')
+			, 'server_boot_ver' : defaultValue('#id_server_boot_ver')
+			, 'server_fw_ver' : defaultValue('#id_server_fw_ver')
+		}
+		
+		$.ajax({
+			type: 'POST',
+			url: this.api,
+			data : JSON.stringify(formData),
+			contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function(res) {
+            	if(res['success']) {
+            		$('#btn-cancel').click();
+            		window.location.href = "{% url 'device.device' %}"
+            	} else {
+ 					alert('저장 실패 :\n' + res['reason'])           		
+            	}
+            },
+            error: function(error) {
+                console.log(error);  // 에러 처리
+            }
+		});
+		
+	}
+}
+
+function onSubmitTerms() {
+	$('#btn-add-item').on('click', function(){
+		var cmd = new CreateDeviceTerm();
+		cmd.execute();
+	});
+}
+
+$(document).ready(function(){
+	onClickAddSerialNo();
+	onSubmitTerms();
+	
+	var current = $('#id_agency_idx').val();
+	var cmd = new UpdateDealerSelect(current);
+	cmd.execute();
+	
+	$('#id_agency_idx').on('change', function(){
+		var agency_idx = $(this).val();
+		console.log(agency_idx)
+		var cmd = new UpdateDealerSelect(agency_idx)
+		cmd.execute();
+	})
+	
+	
+	const checker = new DeviceSerialChecker();
+	checker.check('sdf')
+})
+</script>
+{% endblock %}
+
+
+
+

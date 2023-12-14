@@ -1,0 +1,269 @@
+
+		<div class="row ">
+
+			<div class="col-lg-4 p-3 row form-group">
+				<div class="col-lg-4 font-weight-800 text-right ">단말기 일련번호 </div>
+				<div class="col-lg-8">
+					<input 
+						type='text' 
+						class="form-control" id="id_serial_no" 
+						name="serial_no" placeholder="단말기 일련번호"
+						value="{{ form.serial_no.value | default:''}}"
+						/>
+				</div>
+			</div>
+
+			<div class="col-lg-4 p-3 row form-group">
+				<div class="col-lg-4 font-weight-800 text-right ">벤정보</div>
+				<div class="col-lg-8">
+					<select class="form-control " id="id_van_code" name="van_code">
+						<option value="1">VAN</option>
+						<option value="2">PG</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-lg-4 p-3 row form-group">
+				<div class="col-lg-4 font-weight-800 text-right ">벤구분</div>
+				<div class="col-lg-8">
+					<select class="form-control" id="id_van_type" name="van_type">
+						<option value="1">SMARTRO</option>
+						<option value="2">NICE</option>
+						<option value="3">KCP</option>
+						<option value="4">T-MONEY</option>
+					</select>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<div class="col-lg-12 bg-light  p-3 rounded font-weight-800">
+				신용
+			</div>
+			<div class=" row col-lg-12">
+				<div class="col-lg-4 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						단말기 ID
+					</div>
+					<div class="col-lg-8">
+						<input 
+							type="text" class="form-control" 
+							id="id_server_credit_id" 
+							name="server_credit_id" 
+							value="{{ form.server_credit_id.value | default:''}}"
+							placeholder="단말기 ID"/>
+					</div>
+				</div>
+				<div class="col-lg-4 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						서버 IP
+					</div>
+					<div class="col-lg-8">
+						<input type="text" class="form-control ipv4Address" 
+							id="id_server_credit_ip" name="server_credit_ip"  
+							value="{{ form.server_credit_ip.value | default:''}}"
+							placeholder="서버 IP"/>
+					</div>
+				</div>
+				<div class="col-lg-4 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						서버 PORT
+					</div>
+					<div class="col-lg-8">
+						<input type="text" 
+						class="form-control" 
+						id="id_server_credit_port" name="server_credit_port" 
+						value="{{ form.server_credit_port.value | default:''}}"
+						placeholder="서버 PORT" />
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="col-lg-12 bg-light  p-3 rounded font-weight-800">
+				선불
+			</div>
+			<div class=" row col-lg-12">
+				<div class="col-lg-4 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						단말기 ID
+					</div>
+					<div class="col-lg-8">
+						<input type="text" class="form-control" name="server_pre_id" id="id_server_pre_id"  
+						value="{{ form.server_pre_id.value | default:''}}"
+						placeholder="단말기 ID"/>
+					</div>
+				</div>
+				<div class="col-lg-4 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						서버 IP
+					</div>
+					<div class="col-lg-8">
+						<input type="text" 
+						value="{{ form.server_pre_ip.value | default:''}}"
+						class="form-control ipv4Address" id="id_server_pre_ip" name="server_pre_ip" placeholder="서버 IP"/>
+					</div>
+				</div>
+				<div class="col-lg-4 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						서버 PORT
+					</div>
+					<div class="col-lg-8">
+						<input type="text" 
+						value="{{ form.server_pre_port.value | default:''}}"
+						class="form-control" id="id_server_pre_port" name="server_pre_port" placeholder="서버 PORT" />
+					</div>
+				</div>
+			</div> 
+			
+			
+			</div>
+		</div>
+		
+		<div class="row">
+			<!-- 키교환  -->
+			<div class="col-lg-7 ">
+
+
+				<div class="col-lg-12 bg-light  p-3 rounded font-weight-800">
+					키 교환 
+				</div>	
+				<div class="col-lg-12 row">
+					<div class="col-lg-6 row p-3 form-group">
+						<div class="col-lg-4 text-right">
+							서버 IP
+						</div>
+						<div class="col-lg-8">
+							<input type="text" 
+							value="{{ form.server_key_ip.value | default:''}}"
+							class="form-control ipv4Address" id="id_server_key_ip" name="server_key_ip" placeholder="서버 IP"/>
+						</div>
+					</div>
+					<div class="col-lg-6 row p-3 form-group">
+						<div class="col-lg-4 text-right">
+							서버 PORT
+						</div>
+						<div class="col-lg-8">
+							<input type="text" 
+							value="{{ form.server_key_port.value | default:''}}"
+							class="form-control" id="id_server_key_port" name="server_key_port" placeholder="서버 PORT" />
+						</div>
+					</div>
+				</div>	
+				
+				
+				<div class="col-lg-12 bg-light  p-3 rounded font-weight-800">
+					수집 서버 
+				</div>	
+				<div class="col-lg-12 row">
+					<div class="col-lg-6 row p-3 form-group">
+						<div class="col-lg-4 text-right">
+							서버 IP
+						</div>
+						<div class="col-lg-8">
+							<input type="text" 
+							value="{{ form.server_svr_ip.value | default:''}}"
+							class="form-control ipv4Address" id="id_server_svr_ip" name="server_svr_ip" placeholder="서버 IP"/>
+						</div>
+					</div>
+					<div class="col-lg-6 row p-3 form-group">
+						<div class="col-lg-4 text-right">
+							서버 PORT
+						</div>
+						<div class="col-lg-8">
+							<input type="text" 
+							value="{{ form.server_svr_port.value | default:''}}"
+							class="form-control" id="id_server_svr_port" name="server_svr_port" placeholder="서버 PORT" />
+						</div>
+					</div>
+				</div>	
+				
+				
+			</div>
+			<!-- 가맹점 -->
+			<div class="col-lg-5">
+				<div class="col-lg-12 bg-light  p-3 rounded font-weight-800">
+					가맹점 
+				</div>	
+				<div class="col-lg-12 row ">
+					<div class="col-lg-4 p-3 text-right ">
+						가맹점 명 
+					</div>
+					<div class="col-lg-8 p-3">
+						<input type="text"
+						value="{{ form.server_store_name.value | default:''}}"
+						class="form-control" id="id_server_store_name" name="server_store_name" placeholder="가맹점 명"/>
+					</div>
+				</div>	
+				<div class="col-lg-12 row ">
+					<div class="col-lg-4 p-3 text-right">
+						가맹점 사업자번호 
+					</div>
+					<div class="col-lg-8 p-3">
+						<input type="text" 
+						value="{{ form.server_store_number.value | default:''}}"
+						class="form-control" id="id_server_store_number" name="server_store_number" placeholder="가맹점 사업자번호"/>
+					</div>
+				</div>	
+				<div class="col-lg-12 row ">
+					<div class="col-lg-4 p-3 text-right">
+						가맹점번호 
+					</div>
+					<div class="col-lg-8 p-3">
+						<input type="text" 
+						value="{{ form.server_store_idx.value | default:''}}"
+						class="form-control" id="id_server_store_idx" name="server_store_idx" placeholder="가맹점번호"/>
+					</div>
+				</div>	
+				<div class="col-lg-12 row ">
+					<div class="col-lg-4 p-3 text-right">
+						설치장소명 
+					</div>
+					<div class="col-lg-8 p-3">
+						<input type="text" 
+						value="{{ form.server_site_name.value | default:''}}"
+						class="form-control" id="id_server_site_name" name="server_site_name" placeholder="설치장소명"/>
+					</div>
+				</div>	
+				<div class="col-lg-12 row ">
+					<div class="col-lg-4 p-3 text-right">
+						개통 일자 
+					</div>
+					<div class="col-lg-8 p-3">
+						<input type="text" 
+						value="{{ form.activation_de.value | default:''}}"
+						class="form-control" id="id_activation_de" name="activation_de" placeholder="예) 20230101"/>
+					</div>
+				</div>	
+			</div>
+		
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12">
+			<div class="col-lg-12 bg-light  p-3 rounded font-weight-800">
+				하드웨어 정보 
+			</div>
+			<div class=" row col-lg-12">
+				<div class="col-lg-6 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						BOOT 버전 
+					</div>
+					<div class="col-lg-8">
+						<input type="text" class="form-control" id="id_server_boot_ver" name="server_boot_ver" value="012345678912345"/>
+					</div>
+				</div>
+				<div class="col-lg-6 row p-3 form-group">
+					<div class="col-lg-4 text-right">
+						펌웨어 버전 
+					</div>
+					<div class="col-lg-8">
+						<input type="text" class="form-control" id="id_server_fw_ver" name="server_fw_ver" value="012345678912345"/>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+				

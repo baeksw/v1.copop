@@ -1,0 +1,207 @@
+{% extends 'layout/base.html' %}
+{% block menu_script %}<script>select_menu('.m1',1)</script>{% endblock %}
+{% block page-header-icon %}<i class="fas fa-search"></i>{% endblock %}
+
+{% block page-header %}다운로드 이력{% endblock %}
+
+{% block page-subtitle %}{% endblock %}
+
+{% block main-content %}
+
+<div class="card">
+	<div class=" card-header d-flex justify-content-between">
+		<span>다운로드 이력 조회</span>
+	</div>
+
+	<div class="card-body bg-light p-2">
+		<div class="row ">
+			<div class="col-lg-5  row">
+				<div class="col-lg-4 font-weight-800 text-right ">대리점</div>
+				<div class="col-lg-8 ">
+					<select class="form-control m-0" name="agency" id="id_agency">
+						{% for agency in agency_list %}
+							<option value="{{agency.agency_idx}}">{{agency.managed_name}}</option>
+						{% empty %}
+						<option value="-1">----</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+			<div class="col-lg-5 row ">
+				<div class="col-lg-4 font-weight-800 text-right ">딜러</div>
+				<div class="col-lg-8">
+					<select class="form-control" nam="dealer" id="id_dealer">
+						<option>----</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card-body bg-light p-2">
+		<div class="row ">
+			<div class="col-lg-5  row">
+				<div class="col-lg-4 font-weight-800 text-right ">다운로드일</div>
+				<div class="col-lg-4 "> <input type="text" class="form-control" id="sdate"/> </div>
+				<div class="col-lg-4 "> <input type="text" class="form-control" id="edate"/> </div>
+			</div>
+
+			<div class="col-lg-7 row d-flex justify-content-between ">
+				<div class="">
+					<button class="btn btn-outline-primary" type="button" id="day">오늘</button>
+					<button class="btn btn-outline-primary" type="button" id="month">이번달</button>
+					<button class="btn btn-outline-primary" type="button" id="addmonth">3개월</button>
+					<button class="btn btn-primary" type="button" id="id_search">조회</button>
+				</div>
+				<div class="">
+					<button class="btn btn-success" type="button" id="id_download">엑셀다운로드</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="card-body">
+		<div class="datatable table-responsive" id="id_table_view">
+		</div>
+	</div>
+</div>
+
+{% include 'techleader/download/script.html' %}
+
+<script>
+var current_agency_idx = '-1';
+
+function LoadTable(dealer, sdate, edate) {
+	this.api = "{% url 'info.download.list' '001' '002' '003' %}"
+	this.api = this.api.replace('001', dealer);
+	this.api = this.api.replace('002', sdate);
+	this.api = this.api.replace('003', edate);
+	
+	this.execute = function() {
+		$.get(this.api, function(data) {
+			//console.log(data)
+			$('#id_table_view').html(data);
+			try {
+				$('#dataTable').DataTable({
+					// order: [[0, 'desc']],
+					aaSorting: [],
+					ordering: true,
+					"lengthChange": false,
+					language: {
+						url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Korean.json"
+					},
+					drawCallback: function (settings) {
+						$('#dataTable').css("display", "table");
+					}, 
+				});
+				$('#id_download').prop('disabled', false)
+			} catch (e) {
+				$('#id_table_view').html('<p class="text-center">데이터가 존재하지 않습니다. </p>');
+				$('#id_download').prop('disabled', true)
+			}
+			   
+		});
+	}
+}
+
+function updateTableList() {
+	const dealer = $('#id_dealer').val();
+	const sdate = $('#sdate').val();
+	const edate = $('#edate').val();
+	var loader = new LoadTable(dealer, sdate, edate);
+	loader.execute();
+	console.log(dealer)
+	console.log(sdate)
+	console.log(edate)
+}
+
+
+function UpdateDealerSelect(agency_idx, callback) {
+	this.api = "{% url 'api.dealer.all' '000' %}";
+	this.api = this.api.replace('000', agency_idx);
+		
+	this.execute = function() {
+		if (agency_idx === '-1') {
+			$('#id_dealer').html('<option>----</option>')
+			$('#id_search').prop('disabled', true)
+			$('#id_download').prop('disabled', true)
+		} else {
+			$.getJSON(this.api, function(data){
+				console.log(data)
+				if (data && data.length == 0) {
+					$('#id_dealer').html('<option>----</option>')
+				} 
+				var html = '';
+				$.each(data, function(idx, row ) {
+					html += `<option value="`+row.dealer_idx+`">`+row.dealer_name+`</option>`;
+				});
+				if(html !== '') {
+					$('#id_dealer').html(html)
+					callback();
+				}
+			})
+		}
+	}
+}
+function initEvent() {
+	$('#day').click();
+
+	current_agency_idx = $('#id_agency').val();
+	console.log(current_agency_idx );
+	var cmd = new UpdateDealerSelect(current_agency_idx, updateTableList);
+	cmd.execute();
+	
+	$('#id_agency').on('change', function(){
+		var idx = $(this).val();
+		var cmd = new UpdateDealerSelect(idx);
+		cmd.execute();
+	});
+	
+	$('#id_dealer').on('change', function(){
+		updateTableList();
+	});
+	
+}
+
+function excel_download() {
+	$('#id_download').on('click', function(e) {
+		e.preventDefault();
+
+		const dealer = $('#id_dealer').val();
+		const sdate = $('#sdate').val();
+		const edate = $('#edate').val();	
+
+		var fileUrl = "{% url 'info.download.excel' '001' '002' '003' %}"
+		fileUrl = fileUrl.replace('001', dealer);
+		fileUrl = fileUrl.replace('002', sdate);
+		fileUrl = fileUrl.replace('003', edate);
+		
+        // Create a hidden temporary link
+        var $tempLink = $('<a>');
+        $tempLink.attr('href', fileUrl);
+        $tempLink.attr('target', '_blank');  // Open the link in a new tab (optional)
+        $tempLink.attr('download', 'terms_'+sdate+'_'+edate+'.xlsx');  // Set the desired file name
+
+        // Trigger a click event on the temporary link to start the download
+        $tempLink[0].click();
+
+        // Remove the temporary link from the DOM
+        $tempLink.remove();
+	})
+}
+
+$(document).ready(function(){
+	$('#id_table_view').html('<p class="text-center">데이터가 존재하지 않습니다. </p>');
+	initEvent();
+	excel_download();
+	$('#id_search').on('click',updateTableList );
+});
+
+
+</script>
+{% endblock %}
+
+
+
+

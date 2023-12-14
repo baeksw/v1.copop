@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Master</title>
+</head>
+<body>
+    <h1>Delete Master</h1>
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Yes, delete it">
+    </form>
+    <a href="{% url 'register.master.list' %}">Cancel</a>
+</body>
+</html>

@@ -1,0 +1,134 @@
+
+<script>
+
+
+
+function numberFormat(inputNumber) {
+    return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function sdateReset(x) {
+    $("#sdate").datepicker("setDate", x);
+};
+
+function edateReset(x) {
+    $("#edate").datepicker("setDate", x);
+};
+
+function sdateReset1(x) {
+    $("#sdate1").datepicker("setDate", x);
+};
+
+function edateReset1(x) {
+    $("#edate1").datepicker("setDate", x);
+};
+
+function sdateCo(){
+    $("#sdate").datepicker();
+}
+
+
+$('#day').click(function () {
+    var date = new Date();
+    var Eyyyy = date.getFullYear();
+    var Syyyy = date.getFullYear();
+    var mm = date.getMonth() + 1;
+    var dd = date.getDate();
+
+    mm = mm >= 10 ? mm : '0' + mm;
+    dd = dd >= 10 ? dd : '0' + dd;
+
+    var edateFormat = Eyyyy + "-" + mm + "-" + dd;
+    var sdateFormat = Eyyyy + "-" + mm + "-" + dd;
+
+    var edateFormat1 = Eyyyy  + mm  + dd;
+    var sdateFormat1 = Eyyyy  + mm  + dd;
+
+    $('#edate').val(edateFormat);
+    $('#sdate').val(sdateFormat);
+
+    // $('#sdateSubstr').val(sdateFormat1);
+    // $('#edateSubstr').val(edateFormat1);
+
+    sdateReset(edateFormat);
+    edateReset(sdateFormat);
+});
+
+$('#month').click(function () {
+
+    var date = new Date();
+    var Eyyyy = date.getFullYear();
+    var Syyyy = date.getFullYear();
+    var mm = date.getMonth() + 1;
+    var dd = date.getDate();
+
+    mm = mm >= 10 ? mm : '0' + mm;
+    dd = dd >= 10 ? dd : '0' + dd;
+
+    var edateFormat = Eyyyy + "-" + mm + "-" + dd;
+    var edateFormat1 = Eyyyy + mm + dd;
+
+    var firstDate;
+    var lastDate;
+
+    var firstDate1 = new Date(date.getFullYear(), date.getMonth(), 1);
+    firstDate = moment(firstDate1).format("YYYY-MM-DD");
+    firstDate1 = moment(firstDate1).format("YYYYMMDD");
+    // var  lastDate1 = new Date(date.getFullYear(), date.getMonth()+1, 0);
+    // lastDate = moment(lastDate1).format("YYYY-MM-DD");
+
+    $('#sdate').val(firstDate);
+    $('#edate').val(edateFormat);
+
+    // $('#sdateSubstr').val(firstDate1);
+    // $('#edateSubstr').val(edateFormat1);
+
+    sdateReset(firstDate);
+    edateReset(edateFormat);
+});
+
+$('#addmonth').click(function () {
+    var threeMonthsAgo = moment().subtract(3, 'months');
+
+    var date = new Date();
+    var Eyyyy = date.getFullYear();
+    var Syyyy = date.getFullYear();
+    var mm = date.getMonth() + 1;
+    var mm1 = date.getMonth() - 2 ;
+    var dd = date.getDate();
+
+    mm = mm >= 10 ? mm : '0' + mm;
+    mm1 = mm1 >= 10 ? mm1 : '0' + mm1;
+    dd = dd >= 10 ? dd : '0' + dd;
+
+    var sdateFormat = Eyyyy + "-" + mm1 + "-" + dd;
+    var edateFormat = Eyyyy + "-" + mm + "-" + dd;
+
+    $('#sdate').val(threeMonthsAgo.format("YYYY-MM-DD"));
+    $('#edate').val(edateFormat);
+
+    sdateReset(threeMonthsAgo.format("YYYY-MM-DD"));
+    edateReset(edateFormat);
+
+});
+
+$('#sdate').datepicker({
+    autoclose: true,
+    todayBtn: true,
+    language: 'ko',
+    format: 'yyyy-mm-dd',
+    todayHighlight: true
+}).on('changeDate', function (ev) {
+    // ConfigureReturnDate();
+})
+
+$(' #edate').datepicker({
+    autoclose: true,
+    todayBtn: true,
+    language: 'ko',
+    format: 'yyyy-mm-dd',
+    todayHighlight: true
+})
+
+
+</script>

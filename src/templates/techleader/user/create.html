@@ -1,0 +1,102 @@
+{% csrf_token %} 
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<!-- Agency -->
+ <div class="col-lg-12">
+	<input type="hidden" name="_check" id="_check" value="N" />
+  
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >로그인 아이디<span class="text-danger">*</span></label>
+		<div class="col-lg-3 mr-2">
+		<input class="form-control " placeholder="사용자 아이디를 입력하세요" 
+		id="username" name="username" autocomplete="off" type="text" required />
+		</div>
+		<button class="btn btn-primary col-lg-2 tex-white" type="button" id="id_check_user">중복확인</button> 
+		</div>
+	</div>
+	<div class="form-group mt-2"> 
+		<div class="col-lg-9 offset-lg-3">
+		<span class="helptext">150자 이하 문자, 숫자 그리고 @/./+/-/_만 가능합니다.</span>
+		</div>
+	</div>
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사용자 구분</label>
+		<select class="form-control col-lg-3" name="user_type" id="user_type" >
+			{% if user_type == '01' or user_type == '02' %}
+			<option value="02">마스터</option>
+			{% endif %}
+			<option value="03">대리점</option>
+			<option value="04">딜러</option>
+		</select>
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >대리점</label>
+		<select class="form-control col-lg-3" name="agency" id="agency" >
+			{% for item in agency_list %}
+			<option value="{{ item.agency_idx }}">{{ item.managed_name }}</option>
+			{% endfor %}
+		</select>
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >딜러코드</label>
+		<select class="form-control col-lg-3" id="dealer" name="dealer" >
+			<option value="-1">선택없음</option>
+		</select>
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >비밀번호</label>
+		<div class="col-lg-3 mr-2">
+		<input class="form-control" id="password1" name="password1" autocomplete="off" type="password" required />
+		</div>
+	</div>
+	<div class="form-group mt-2"> 
+		<div class="col-lg-9 offset-lg-3">
+		 <span class="helptext "><ul><li>다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.</li><li>비밀번호는 최소 8자 이상이어야 합니다.</li><li>통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.</li><li>숫자로만 이루어진 비밀번호는 사용할 수 없습니다.</li></ul></span>
+		</div>
+	</div>
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >비밀번호 확인</label>
+		<div class="col-lg-3 mr-2">
+		<input class="form-control" id="password2" name="password2" autocomplete="off" type="password" required />
+		</div>
+		<button class="btn btn-danger col-lg-2 " id="check_password" type="button">비밀번호 확인</button>
+		</div>
+	</div>
+	<div class="form-group mt-2"> 
+		<div class="col-lg-9 offset-lg-3">
+		<span class="helptext">확인을 위해 이전과 동일한 비밀번호를 입력하세요. </span>
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사용자 이름<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3 mr-2" placeholder="사용자 이름을 입력하세요" 
+		id="first_name" name="first_name" autocomplete="off" type="text" required />
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사용자 이메일<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3 mr-2" placeholder="사용자 이메일 를 입력하세요" 
+		id="email" name="email" autocomplete="off" type="email"  />
+		</div>
+	</div>
+	
+</div>

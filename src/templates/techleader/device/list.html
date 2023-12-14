@@ -1,0 +1,39 @@
+<table class="table table-bordered table-hover" id="dataTable" style="display: block" width="100%" cellspacing="0">
+	<thead>
+		<tr>
+			<th>순번</th>
+			<th>단말기 일련번호</th>
+			<th>대리점</th>
+			<th>딜러</th>
+			<th>단말기ID</th>
+			<th>펌웨어버전</th>
+			<th>가맹점명</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for row in object_list %}
+	<tr rid="{{row.serial_no}}">
+		<td class="text-center">{{ forloop.revcounter}}</td>
+		<td class="text-center">{{ row.serial_no }}</td>
+		<td class="text-center">{{ row.managed_code_shop }}</td>
+		<td class="text-center">{{ row.managed_code_dealer }}</td>
+		<td class="text-center">{{ row.mac_address| default:"" }}</td>
+		<td class="text-center">{{ row.server_fw_ver | default:""}}</td>
+		<td class="text-center">{{ row.server_store_name | default:""}}</td>
+	</tr>
+{% empty %}
+	<tr>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+{% endfor %}
+	</tbody>
+</table>
+<!-- 
+		<td colspan="8" class="text-center">데이터가 존재하지 않습니다.</td>
+ -->

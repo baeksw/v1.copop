@@ -1,0 +1,98 @@
+{% csrf_token %} 
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<!-- Agency -->
+ <div class="col-lg-12">
+	{% include 'techleader/forms/input.html' with  item=form.dealer_name %}
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >{{ form.dealer_name.label }}<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="{{ form.dealer_name.label }}을 입력하세요" 
+		id="{{ form.dealer_name.name }}" 
+		name="{{ form.dealer_name.name }}" 
+		value="{{ form.dealer_name.value | default:"" }}"
+		autocomplete="off" type="text" required />
+		{% for error in form.dealer_name.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+
+    <div class="form-group mt-2"> 
+        <div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >{{ form.agency_idx.label }}<span class="text-danger">*</span></label>
+		<select class="form-control col-lg-3"  name="{{ form.agency_idx.html_name }}" id="{{ form.agency_idx.id_for_label }}">
+		{% for value, text in form.agency_idx.field.choices %}
+			<option value="{{ value }}"{% if form.agency_idx.value == value %} selected{% endif %}>{{ text }}</option>
+		{% endfor %}
+		</select>   
+
+		{% for error in form.agency_idx.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+    </div>
+
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >{{ form.dealer_code.label }}<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="{{ form.dealer_code.label }}을 입력하세요" 
+		id="{{ form.dealer_code.name }}" 
+		name="{{ form.dealer_code.name }}" 
+		value="{{ form.dealer_code.value | default:"" }}"
+		autocomplete="off" type="text" required />
+		{% for error in form.dealer_code.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >{{ form.dealer_mob.label }}<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="{{ form.dealer_mob.label }}을 입력하세요" 
+		id="{{ form.dealer_mob.name }}" 
+		name="{{ form.dealer_mob.name }}" 
+		value="{{ form.dealer_mob.value | default:"" }}"
+		autocomplete="off" type="text" required />
+		{% for error in form.dealer_mob.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >{{ form.email.label }}<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="{{ form.email.label }}을 입력하세요" 
+		id="{{ form.email.name }}" 
+		name="{{ form.email.name }}" 
+		value="{{ form.email.value | default:"" }}"
+		autocomplete="off" type="text" required />
+		{% for error in form.email.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+
+</div>
+	

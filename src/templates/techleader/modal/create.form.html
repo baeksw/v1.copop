@@ -1,0 +1,21 @@
+<!-- newRegModal -->
+<form class="form-horizontal" id="form_modal_C" method="POST" action="{{ action }}">
+{% csrf_token %} 
+    <div class="modal fade " id="newRegModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered {{ modal_size }} " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle1">{{ title }}</h5>
+                    <button class="close"  type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" id="cancel2">×</span></button>
+                </div>
+                <div class="modal-body new-modal">
+                   
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary" id="cancel" type="button" data-dismiss="modal"  style="width: 88px; height: 44px; font-size: 14px;">취소</button>
+                    <button class="btn btn-secondary" id="btn-form-add" type="submit"  style="width: 88px; height: 44px; font-size: 14px;">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

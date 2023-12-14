@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+{% block menu_script %}<script>select_menu('.m2',3)</script>{% endblock %}
+{% block page-header-icon %}<i class="fas fa-search"></i>{% endblock %}
+
+{% block page-header %}딜러 관리{% endblock %}
+
+{% block page-subtitle %}{% endblock %}
+
+{% block main-content %}
+
+<div class="card">
+	<div class=" card-header d-flex justify-content-between">
+		<span>조회</span>
+		<button class="btn btn-secondary btn-sm" type="button" id="id_add"><i class="fa fa-plus mr-2"></i>신규등록</button>
+	</div>
+	<div class="card-body">
+		<div class="datatable table-responsive" id="id_table_view">
+		</div>
+	</div>
+</div>
+
+{% include 'techleader/dealer/script.html' %}
+{% endblock %}
+
+
+
+

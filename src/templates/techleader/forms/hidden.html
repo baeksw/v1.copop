@@ -1,0 +1,5 @@
+{% if item.value %}
+<input type="hidden" name="{{item.name}}" value="{{item.value}}">
+{% else %}
+<input type="hidden" name="{{item.name}}" value="{{ value }}">
+{% endif %}

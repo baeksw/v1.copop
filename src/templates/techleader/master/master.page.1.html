@@ -1,0 +1,288 @@
+{% extends 'layout/base.html' %}
+{% block menu_script %}<script>select_menu('.m2',1)</script>{% endblock %}
+
+{% block page-header-icon %}<i class="fas fa-search"></i>{% endblock %}
+
+{% block page-header %}마스터 관리{% endblock %}
+
+{% block page-subtitle %}조회 결과는 파일 다운로드가 완료된 내역을 단말기 순으로 정렬합니다. {% endblock %}
+                
+
+{% block main-content %}
+
+{% if messages %}
+        {% for message in messages %}
+        <script> alert('{{ message }}') </script>
+        {% endfor %}
+
+{% endif %}
+    
+<div class="card">
+	<div class=" card-header d-flex justify-content-between">
+		<span>조회</span>
+<button class="btn btn-secondary btn-sm" type="button" id="id_add">신규등록</button>
+	</div>
+	<div class="card-body">
+		<div class="datatable table-responsive">
+ <table class="table table-bordered table-hover" id="dataTable" style="display: none" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                                <th>Salary</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                       
+                                        <tbody>
+                                            <tr>
+                                                <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                                <td>$320,800</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Garrett Winters</td>
+                                                <td>Accountant</td>
+                                                <td>Tokyo</td>
+                                                <td>63</td>
+                                                <td>2011/07/25</td>
+                                                <td>$170,750</td>
+                                                <td><div class="badge badge-warning badge-pill">Pending</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ashton Cox</td>
+                                                <td>Junior Technical Author</td>
+                                                <td>San Francisco</td>
+                                                <td>66</td>
+                                                <td>2009/01/12</td>
+                                                <td>$86,000</td>
+                                                <td><div class="badge badge-secondary badge-pill">Part-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cedric Kelly</td>
+                                                <td>Senior Javascript Developer</td>
+                                                <td>Edinburgh</td>
+                                                <td>22</td>
+                                                <td>2012/03/29</td>
+                                                <td>$433,060</td>
+                                                <td><div class="badge badge-info badge-pill">Contract</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Airi Satou</td>
+                                                <td>Accountant</td>
+                                                <td>Tokyo</td>
+                                                <td>33</td>
+                                                <td>2008/11/28</td>
+                                                <td>$162,700</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brielle Williamson</td>
+                                                <td>Integration Specialist</td>
+                                                <td>New York</td>
+                                                <td>61</td>
+                                                <td>2012/12/02</td>
+                                                <td>$372,000</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Herrod Chandler</td>
+                                                <td>Sales Assistant</td>
+                                                <td>San Francisco</td>
+                                                <td>59</td>
+                                                <td>2012/08/06</td>
+                                                <td>$137,500</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rhona Davidson</td>
+                                                <td>Integration Specialist</td>
+                                                <td>Tokyo</td>
+                                                <td>55</td>
+                                                <td>2010/10/14</td>
+                                                <td>$327,900</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Colleen Hurst</td>
+                                                <td>Javascript Developer</td>
+                                                <td>San Francisco</td>
+                                                <td>39</td>
+                                                <td>2009/09/15</td>
+                                                <td>$205,500</td>
+                                                <td><div class="badge badge-info badge-pill">Contract</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sonya Frost</td>
+                                                <td>Software Engineer</td>
+                                                <td>Edinburgh</td>
+                                                <td>23</td>
+                                                <td>2008/12/13</td>
+                                                <td>$103,600</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jena Gaines</td>
+                                                <td>Office Manager</td>
+                                                <td>London</td>
+                                                <td>30</td>
+                                                <td>2008/12/19</td>
+                                                <td>$90,560</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quinn Flynn</td>
+                                                <td>Support Lead</td>
+                                                <td>Edinburgh</td>
+                                                <td>22</td>
+                                                <td>2013/03/03</td>
+                                                <td>$342,000</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Charde Marshall</td>
+                                                <td>Regional Director</td>
+                                                <td>San Francisco</td>
+                                                <td>36</td>
+                                                <td>2008/10/16</td>
+                                                <td>$470,600</td>
+                                                <td><div class="badge badge-primary badge-pill">Full-time</div></td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="more-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                                </td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>			
+		</div>
+	</div>
+</div>
+
+
+
+<div id="add-form" style="display:none"></div>
+
+<form class="form-horizontal" id="form_modal1" method="POST" action="{% url 'register.master.create' %}">
+    <input type="hidden" id="group_seq2" name="group_seq" value=""/>
+    <input type="hidden" id="device_state" name="device_state" value="01"/>
+    <input type="hidden" id="user_id" name="user_id" value=""/>
+    <input type="hidden" id="before_stock" name="before_stock" value="" />
+    <div class="modal fade" id="newRegistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle1">충전기 등록</h5>
+                    <button class="close"  type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" id="cancel2">×</span></button>
+                </div>
+                <div class="modal-body">
+                   
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary" id="cancel" type="button" data-dismiss="modal"  style="width: 88px; height: 44px; font-size: 14px;">취소</button>
+                    <button class="btn btn-secondary" id="charge_ins" type="submit"  style="width: 88px; height: 44px; font-size: 14px;">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+        {% block sb_script %}
+       
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+     
+        <script type="text/javascript">
+        
+        
+        function LoadAddForm() {
+        	this.api = "{% url 'register.master.create' %}"
+        	console.log(this.api)
+        	$.get(this.api, function(data) {
+        		$('.modal-body').html(data);
+        	});
+        }
+
+        $(document).ready(function () {
+        	
+        	
+        	
+        	
+        	
+            $('#dataTable').DataTable({
+                // order: [[0, 'desc']],
+                aaSorting: [],
+                ordering: true,
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Korean.json"
+                },
+                drawCallback: function (settings) {
+                    $('#dataTable').css("display", "table");
+                }
+            });
+            
+            
+           	$('#dataTable tbody ').on('click', 'tr', function() {
+           		var row = $(this).closest('tr');
+           		alert(row.text())
+           	})
+			
+           	
+           	$('#id_add').on('click touch', function(){
+           		new LoadAddForm();
+           		$('#newRegistModal').modal('show');
+           	});
+        });
+
+</script>
+        {% endblock %}
+
+
+
+

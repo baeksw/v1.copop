@@ -1,0 +1,61 @@
+ <div class="col-xs-8">
+	<div class="form-group">
+		<label class="col-xs-3 control-label" style="float: left; margin:2%; margin-right: 5%; font-weight: bolder;">111충전기명</label>
+		<div class="col-xs-6">
+			<input class="form-control" placeholder="충전기명을 입력하세요" id="name"
+				   name="name" autocomplete="off" type="search" style="width: 60%;"/>
+		</div>
+	</div>
+	<div id="chargeTab" class="searchTab" style="display: block;">
+		<div class="form-group">
+			<label class="col-xs-3 control-label" style="float: left; margin:2%; margin-right: 5%; font-weight: bolder;">잔여카드</label>
+			<div class="col-xs-6">
+				<input class="form-control" id="current_stock"
+					   name="current_stock" autocomplete="off" type="text" numberOnly style="width: 30%; text-align: right;"/>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-3 control-label"  style="float: left; margin:2%; margin-right: 5%; font-weight: bolder;">모델구분</label>
+		<div class="col-xs-6">
+			<select class="form-control" id="model_type" name="model_type" style="width: 60%; ">
+				<option value="01">고급형</option>
+				<option value="02">일반형</option>
+				<option value="03">보급형</option>
+				<option value="04">단말기</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-3 control-label" style="float: left; margin:2%; margin-right: 3.3%; font-weight: bolder;">H/W 버전</label>
+		<div class="col-xs-6">
+			<input class="form-control" id="hw_ver"
+				   name="hw_ver" autocomplete="off" type="text" numberOnly style="width: 20%; display: inline; float:left;"/>
+			
+			<label class="col-xs-3 control-label" style="float: left; margin:2%; font-weight: bolder;">S/W 버전</label>
+			<input class="form-control" id="sw_ver"
+				   name="sw_ver" autocomplete="off" type="text" numberOnly style="width: 20%; display: inline;" >
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-3 control-label" style="float: left; margin:2%; margin-right: 4.5%; font-weight: bolder;">충전기 IP</label>
+		<div class="col-xs-6">
+			<input class="form-control" id="ip_address"
+				   name="ip_address" autocomplete="off" type="text" numberOnly style="width: 60%;"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-3 control-label" style="float: left; margin:2%; font-weight: bolder;">무선공유기</label>
+		<div class="col-xs-6">
+			<select class="form-control" id="router_seq" name="router_seq" style="width: 60%; ">
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-3 control-label" style="float: left; margin:2%; margin-right: 9%; font-weight: bolder;">관리자</label>
+		<div class="col-xs-6">
+			<select class="form-control" id="admin_seq" name="admin_seq" style="width: 60%; ">
+			</select>
+		</div>
+	</div>
+</div>

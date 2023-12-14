@@ -1,0 +1,78 @@
+<!-- 
+https://fontawesome.com/v5/search?q=device&o=r
+ -->
+ 
+ <style>
+ 
+ </style>
+                <nav class="sidenav shadow-right sidenav-dark">
+                    <div class="sidenav-menu">
+                        <div class="nav accordion" id="accordionSidenav">
+
+                            <div class="sidenav-menu-heading">Menu</div>
+
+                            <a class="nav-link collapsed m1" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseMenu_1" aria-expanded="false" aria-controls="collapseLayouts" >
+                            	<div class="nav-link-icon"><i class="fas fa-search"></i></div>
+                            	정보조회 
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div >
+                            </a>
+                            <div class="collapse" id="collapseMenu_1" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                                    <a class="nav-link m1-1" href="{% url 'info.download' %}">다운로드 이력</a>
+                                    <a class="nav-link m1-2" href="{% url 'info.connect' %}">접속 이력</a>
+                                </nav> 
+                            </div>
+                            
+                            <a class="nav-link collapsed m2" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseMenu_2" aria-expanded="false" aria-controls="collapseLayouts" >
+                            <div class="nav-link-icon"><i class="fas fa-archive"></i></div>
+                            	등록관리
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div ></a>
+                            <div class="collapse" id="collapseMenu_2" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                                    <a class="nav-link m2-1" href="{% url 'register.master' %}">마스터 관리</a>
+                                    <a class="nav-link m2-2" href="{% url 'register.agency' %}">대리점 관리</a>
+                                    <a class="nav-link m2-3" href="{% url 'register.dealer' %}">딜러 관리</a>
+                                    <a class="nav-link m2-4" href="{% url 'register.user' %}">사용자 관리</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed m3" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseMenu_3" aria-expanded="false" aria-controls="collapseLayouts" >
+                            <div class="nav-link-icon"><i class="fas fa-mobile-alt"></i></div>
+                            	단말기관리 
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div ></a>
+                            <div class="collapse" id="collapseMenu_3" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                                    <a class="nav-link m3-1" href="{% url 'device.device' %}">단말기 관리</a>
+                                    <a class="nav-link m3-2" href="{% url 'device.firmware' %}">펌웨어 관리</a>
+                                </nav>
+                            </div>
+                            
+                            <div class="sidenav-menu-heading">Contact</div>
+
+                            <span class="nav-link disabled">
+                            <div class="nav-link-icon"> <i class="fas fa-calendar"></i></div>
+                            	<div class="font-weight-500" id="currentTime"></div>
+                            </span>
+                            <span class="nav-link disabled">
+                            <ul class="ul-techleader">
+                            <li>주식회사&nbsp;<h4 class="text-light">테크리더</h4></li>
+                            <li>시스템문의 대표전화 </li>
+                            <li><i class="fas fa-phone"></i>032-613-9901</li>
+                            </ul>
+                            	
+                            	
+                            </span>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="sidenav-footer">
+                        <div class="sidenav-footer-content">
+                            <div class="sidenav-footer-subtitle">Logged in as:</div>
+                            <div class="sidenav-footer-title">{{ user.username }}</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </nav>

@@ -1,0 +1,123 @@
+{% include 'techleader/modal/create.form.html' with title="단말기 등록" action="/register/device/create" modal_size="modal-lg" %}
+{% include 'techleader/modal/update.form.html' with title="단말기 관리" action="/register/device/update" modal_size="modal-lg" %}
+
+<script>
+$('#id_activation_de').datepicker({
+    autoclose: true,
+    todayBtn: true,
+    language: 'ko',
+    format: 'yyyymmdd',
+    todayHighlight: true
+}).on('changeDate', function (ev) {
+    // ConfigureReturnDate();
+})
+
+$('.ipv4Address').on('input', function(e) {
+    var ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    if (!ipv4Pattern.test(e.target.value)) {
+        e.target.setCustomValidity('Please enter a valid IPv4 address.');
+    } else {
+        e.target.setCustomValidity('');
+    }
+});
+
+function LoadAddForm() {
+	this.api = "{% url 'device.device.create' %}"
+	console.log(this.api)
+	$.get(this.api, function(data) {
+		$('.new-modal').html(data);
+	});
+}
+
+function LoadUpdateForm(pk) {
+	this.api = "{% url 'device.device.update' '000' %}";
+	this.api = this.api.replace('000', pk)
+
+	$.get(this.api, function(data) {
+		$('.update-modal').html(data);
+	});
+	
+}
+
+function LoadTable() {
+	this.api = "{% url 'device.device.list' %}"
+	$.get(this.api, function(data) {
+		//console.log(data)
+		$('#id_table_view').html(data);
+		
+		$('#dataTable').DataTable({
+			// order: [[0, 'desc']],
+			aaSorting: [],
+			ordering: true,
+			language: {
+				url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Korean.json"
+			},
+			"lengthChange": false,
+			drawCallback: function (settings) {
+				$('#dataTable').css("display", "table");
+			}
+		});
+		
+		
+		$('#dataTable tbody ').on('click', 'tr', function(e) {
+			
+			if ($(e.target).is('td') && $(e.target).index() === 1) {
+				console.log('skip checkbox ')
+				return;
+			}
+			
+			if ($(e.target).is('input')) {
+				return;
+			}
+			
+			var row = $(this).closest('tr');
+			//alert(row.text())
+			//console.log($(row).html())
+			const pk = $(row).attr('rid');
+			const update = new LoadUpdateForm(pk);
+
+			$('#newRegModal').modal('hide');
+			$('#UpdateModal').modal('show')
+			
+			$('#id_update').on('click touch', function(){
+				var api = "{% url 'device.device.update' '000' %}";
+				api = api.replace('000', pk)
+
+				if (confirm('데이터를 수정하시겠습니까?')) {
+					var frm = $('#form_modal_UD');
+					frm.attr('method', 'POST');
+					frm.attr('action', api);
+					frm.submit();
+				}
+			})
+			
+			$('#id_delete').on('click touch', function(){
+				var api = "{% url 'device.device.delete' '000' %}";
+				api = api.replace('000', pk)
+
+				if (confirm('데이터를 삭제하시겠습니까?')) {
+					var frm = $('#form_modal_UD');
+					frm.attr('method', 'POST');
+					frm.attr('action', api);
+					frm.submit();
+				}
+				
+			});
+		
+		})
+		   
+	});
+}
+
+$(document).ready(function () {
+	new LoadTable();
+
+	$('#id_add').on('click touch', function(){
+		new LoadAddForm();
+		$('#UpdateModal').modal('hide')
+		$('#newRegModal').modal('show');
+	});
+
+});
+
+</script>

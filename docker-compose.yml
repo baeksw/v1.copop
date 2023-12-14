@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    build: ./src
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./src:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: 'mysql+pymysql://admin:admin#1123@db/copop'
+      MYSQL_DATABASE: copop
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin#1123
+      MYSQL_HOST: techleader_db
+      MYSQL_PORT: 3306
+    networks:
+      - network_techleader
+
+networks:
+  network_techleader:
+    external: true

@@ -1,0 +1,180 @@
+{% include 'techleader/modal/create.form.html' with title="사용자 등록" action="/register/user/create" modal_size="modal-xl" %}
+{% include 'techleader/modal/update.form.html' with title="사용자 관리" action="/register/user/update" modal_size="modal-xl" %}
+
+<script>
+
+function OnCheckPassword() {
+	console.log('check password')
+	$('#check_password').on('click', function(){
+
+		var pass1 = $('#password1').val();
+		var pass2 = $('#password2').val();
+
+		if(pass1 && pass1.length > 0) {
+			if (pass1 !== pass2) {
+				alert('비밀번호가 일치하지 않습니다. ') 
+			} else {
+				alert('비밀번호가 일치합니다. ')
+			}
+		}
+	})
+}
+
+function OnCheckUsername() {
+	$('#id_check_user').on('click',function(){
+		var username = $.trim($('#username').val());
+		
+		if(username.length == 0) {
+			alert('사용자 아이디를 입력하세요 ')
+			return;
+		}
+
+		$.ajax({
+			url: "{% url 'check.user' %}",
+			data : {
+				'username' : username
+			},
+			dataType: 'json'
+			, success: function(data) {
+				console.log(data)
+				if(data.exists) {
+					alert('이미 존재하는 아이디입니다.')
+				} else {
+					alert('사용가능한 아이디입니다. ')
+				}
+			} 
+		});
+	});
+}
+
+
+
+function OnChangeAgency(pk) {
+	this.api = "{% url 'select.dealer' '000' %}";
+	this.api = this.api.replace('000', pk)
+	console.log(this.api)
+	
+	$.get(this.api, function(data) {
+		$('#dealer').html('')
+		$('#dealer').html('<option value="-1">해당사항없음 </option>')
+			
+		var  html = '<option value="-1">해당사항없음 </option>'
+		if (data.length > 0) {
+			$.each(data, function(idx, v){
+				console.log(v)
+				did = v.dealer_idx
+				dnm = v.dealer_name
+				html += '<option value="'+did+'">'+dnm+'</option>'
+			});
+		}
+		$('#dealer').html(html)
+
+	});
+	
+}
+
+function LoadAddForm() {
+	this.api = "{% url 'register.user.create' %}"
+	console.log(this.api)
+	$.get(this.api, function(data) {
+		
+		$('.new-modal').html(data);
+		
+		$('#agency').on('change', function() {
+			var id = $(this).val()
+			console.log(id)
+			new OnChangeAgency(id);
+			
+		});
+
+		new OnCheckUsername();
+		new OnCheckPassword() ;
+	});
+	
+	
+}
+
+function LoadUpdateForm(pk) {
+	this.api = "{% url 'register.user.update' '000' %}";
+	this.api = this.api.replace('000', pk)
+
+	$.get(this.api, function(data) {
+		$('.update-modal').html(data);
+	});
+	
+}
+
+function LoadTable() {
+	this.api = "{% url 'register.user.list' %}"
+	$.get(this.api, function(data) {
+		//console.log(data)
+		$('#id_table_view').html(data);
+		
+		$('#dataTable').DataTable({
+			// order: [[0, 'desc']],
+			aaSorting: [],
+			ordering: true,
+			"lengthChange": false,
+			language: {
+				url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Korean.json"
+			},
+			drawCallback: function (settings) {
+				$('#dataTable').css("display", "table");
+			}
+		});
+		
+		
+		$('#dataTable tbody ').on('click', 'tr', function() {
+			var row = $(this).closest('tr');
+			//alert(row.text())
+			//console.log($(row).html())
+			const pk = $(row).attr('rid');
+			const update = new LoadUpdateForm(pk);
+
+			$('#newRegModal').modal('hide');
+			$('#UpdateModal').modal('show')
+			
+			$('#id_update').on('click touch', function(){
+				var api = "{% url 'register.user.update' '000' %}";
+				api = api.replace('000', pk)
+
+				if (confirm('데이터를 수정하시겠습니까?')) {
+					var frm = $('#form_modal_UD');
+					frm.attr('method', 'POST');
+					frm.attr('action', api);
+					frm.submit();
+				}
+			})
+			
+			$('#id_delete').on('click touch', function(){
+				var api = "{% url 'register.user.delete' '000' %}";
+				api = api.replace('000', pk)
+
+				if (confirm('데이터를 삭제하시겠습니까?')) {
+					var frm = $('#form_modal_UD');
+					frm.attr('method', 'POST');
+					frm.attr('action', api);
+					frm.submit();
+				}
+				
+			});
+		
+		})
+		   
+	});
+}
+
+$(document).ready(function () {
+
+	new LoadTable();
+	
+
+	$('#id_add').on('click touch', function(){
+		new LoadAddForm();
+		$('#UpdateModal').modal('hide')
+		$('#newRegModal').modal('show');
+	});
+
+});
+
+</script>

@@ -1,0 +1,14 @@
+{% csrf_token %} 
+<!-- 
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+ -->
+
+<!-- Agency -->
+ <div class="col-lg-12">
+	{% include 'techleader/forms/input.html' with item=form.managed_name required=True %}
+	{% include 'techleader/forms/input.html' with item=form.managed_code_master readonly=True %}
+	{% include 'techleader/forms/input.html' with item=form.manager_name required=True %}
+	{% include 'techleader/forms/input.html' with item=form.manager_tel required=True %}
+	{% include 'techleader/forms/input.html' with item=form.manager_email %}
+	{% include 'techleader/forms/hidden.html' with item=form.use_yn value='Y' %}
+</div>

@@ -1,0 +1,17 @@
+    <div class="form-group mt-2"> 
+        <div class="row d-flex flex-row align-items-baseline flex-nowrap">
+        <label class="control-label col-lg-3 mr-2 text-right" >{{ item.label }}<span class="text-danger">*</span></label>
+
+		<select class="form-control col-lg-3"  name="{{ item.html_name }}" id="{{ item.id_for_label }}">
+		{% for value, text in item.field.choices %}
+			<option value="{{ value }}"{% if item.value == value %} selected{% endif %}>{{ text }}</option>
+		{% endfor %}
+		</select>   
+
+		{% for error in item.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+    </div>

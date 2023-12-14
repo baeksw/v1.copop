@@ -1,0 +1,117 @@
+{% include 'techleader/modal/firmware.update.form.html' with title="단말기 펌웨어변경" modal_size="modal-lg" %}
+
+<script>
+
+function LoadSubsetList(checked_list) {
+
+	this.api = "{% url 'device.firmware.subset' '000' %}";
+	this.api = this.api.replace('000', checked_list)
+
+	$.get(this.api, function(data) {
+		$('.update-modal').html(data);
+	});
+}
+
+function LoadTable() {
+	this.api = "{% url 'device.firmware.list' %}"
+	$.get(this.api, function(data) {
+		//console.log(data)
+		$('#id_table_view').html(data);
+		
+		var table = $('#dataTable').DataTable({
+			// order: [[0, 'desc']],
+			aaSorting: [],
+			ordering: true,
+			"lengthChange": false, 
+			language: {
+				url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Korean.json"
+			},
+			'columnDefs' : [
+				{
+					'targets' : 1
+					,'checkboxes' : {
+						'selectRow' : true
+					}
+				}
+			],
+			drawCallback: function (settings) {
+				$('#dataTable').css("display", "table");
+			}
+		});
+
+		$('#dataTable tbody ').on('click', 'tr', function(e) {
+			
+			if ($(e.target).is('td') && $(e.target).index() === 1) {
+				console.log('skip checkbox ')
+				return;
+			}
+			
+			if ($(e.target).is('input')) {
+				return;
+			}
+			
+
+		
+		});	
+ 
+/* 		$('#id_update').on('click', function(){
+			var selectRows = table.rows('.selected').data();
+			var serialNos = [];
+			console.log(selectRows[0][2])
+			for (var i = 0; i < selectRows.length; i++) {
+				serialNos.push(selectRows[i][2]);
+			}
+			
+			
+			console.log('selected serial_no values: ', serialNos)
+		});
+ */		   
+	});
+}
+
+$(document).ready(function () {
+	new LoadTable();
+	$('#id_fw_update').on('click', function(e){
+
+		e.preventDefault();
+		
+		var rows = [];
+		$('input[type=checkbox]:checked').each(function(){
+			var serial_no = $(this).attr('serial_no');
+			rows.push(serial_no);
+		});
+		
+		if ( rows.length == 0) {
+			return;
+		}
+		
+		
+		const pk = rows.join(",")
+		const update = new LoadSubsetList(pk);
+
+		$('#newRegModal').modal('hide');
+		$('#UpdateModal').modal('show')
+		
+		$('#id_update').on('click touch', function(){
+			
+			var new_fw_ver = $('#id_server_fw_ver').val();
+			if (new_fw_ver && new_fw_ver.length > 0) {
+				// todo : add update api 
+				var api = "{% url 'device.firmware.update' '000' %}";
+				api = api.replace('000', pk)
+				var msg = `잘못된 펌웨어를 변경하면 단말기에서 치명적인 오류가 발생 할 수 있습니다. 새로운 펌웨어로 변경하시겠습니까?`
+				
+				if (confirm(msg)) {
+					var frm = $('#form_modal_UD');
+					frm.attr('method', 'POST');
+					frm.attr('action', api);
+					frm.submit();
+				}
+			}
+		})
+
+	});
+
+});
+
+</script>

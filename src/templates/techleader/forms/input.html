@@ -1,0 +1,16 @@
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label {% if ls %}col-lg-{{ls}}{% else %}col-lg-3{% endif %} mr-2 text-right" >{{ item.label }}{% if required %}<span class="text-danger">*</span>{% endif %}</label>
+		<input class="form-control {% if cs   %}col-lg-{{cs}}{% else %}col-lg-3{% endif %} " 
+		placeholder="{{ item.label }}" 
+		id="id_{{ item.name }}" 
+		name="{{ item.name }}" 
+		value="{{ item.value | default:'' }}"
+		autocomplete="off" type="text" {% if required %}required{% endif %} {% if readonly %} readonly {% endif%} />
+		{% for error in item.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>

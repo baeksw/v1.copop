@@ -1,0 +1,8 @@
+
+CREATE DATABASE `copop` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+
+GRANT SELECT, INSERT ON my_database.my_table TO 'my_user'@'localhost' IDENTIFIED BY 'my_password';
+
+GRANT SELECT, INSERT ON copop.* TO 'admin'@'%' IDENTIFIED BY 'admin#1123';
+
+flush privileges;

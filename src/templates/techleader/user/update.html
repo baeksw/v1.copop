@@ -1,0 +1,76 @@
+{% csrf_token %} 
+
+
+<!-- Agency -->
+ <div class="col-lg-12">
+	<input type="hidden" name="_check" id="_check" value="N" />
+  
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3  text-right" >로그인 아이디</label>
+		<div class="col-lg-3 mr-2">
+			<input class="form-control "id="username" name="username" autocomplete="off" type="text" value="{{profile.user.profile}}" readonly>
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3  text-right" >사용자 구분</label>
+		<div class="col-lg-3 mr-2">
+			<input class="form-control "id="user_type" name="user_type" autocomplete="off" type="text"
+			{% if profile.user_type == '01' or profile.user_type == '02' %}
+			 value="마스터" 
+			{% elif profile.user_type ==  '03' %}
+			 value="대리점" 
+			{% elif profile.user_type ==  '04' %}
+			 value="딜러" 
+			{% endif %}
+		readonly>
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3  text-right" >대리점</label>
+		<div class="col-lg-3 mr-2">
+			<input class="form-control "id="agency" name="agency" autocomplete="off" type="text"
+			value="{{ profile.agency_idx.managed_name  |default:"-" }}"
+		readonly>
+		</div>
+		
+	</div>
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3  text-right" >딜러</label>
+		<div class="col-lg-3 mr-2">
+			<input class="form-control "id="dealer" name="dealer" autocomplete="off" type="text"
+			value="{{ profile.dealer_idx.dealer_name  |default:'-'}}"
+		readonly>
+		</div>
+		
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >비밀번호 </label>
+		<a href="{% url 'change.user.password' profile.user.username %}" class="btn btn-danger col-lg-2 " id="check_password" type="button">비밀번호 변경하기</a>
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사용자 이름<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3 mr-2" placeholder="사용자 이름을 입력하세요" 
+		id="first_name" name="first_name" autocomplete="off" type="text" value="{{ profile.user.first_name }}" required />
+		</div>
+	</div>
+
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사용자 이메일<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3 mr-2" placeholder="사용자 이메일 를 입력하세요" 
+		id="email" name="email" autocomplete="off" type="email"  value="{{profile.user.email }}"/>
+		</div>
+	</div>
+	
+</div>

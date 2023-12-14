@@ -1,0 +1,77 @@
+<div class="datatable table-responsive row ml-2 mr-2" id="id_sub_table_view">
+<table class="table table-bordered table-hover col-lg-12" id="sub_dataTable" >
+	<colgroup>
+		<col width="10%"/>
+		<col width="30%"/>
+		<col width="*"/>
+		<col width="30%"/>
+		<col width="10%"/>
+	</colgroup>
+	<thead>
+		<tr>
+			<th>순번</th>
+			<th>단말기일련번호</th>
+			<th>단말기ID</th>
+			<th>현재 펌웨어버전</th>
+			<th>가맹점명</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for row in object_list %}
+	<tr rid="{{row.serial_no}}">
+		<td class="text-center">{{ forloop.revcounter}}</td>
+		<td class="text-center">{{ row.serial_no }}</td>
+		<td class="text-center">{{ row.mac_address| default:"" }}</td>
+		<td class="text-center">{{ row.server_fw_ver | default:""}}</td>
+		<td class="text-center">{{ row.server_store_name | default:""}}</td>
+	</tr>
+{% empty %}
+	<tr>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+{% endfor %}
+	</tbody>
+</table>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<span class="row d-flex justify-content-center">
+			<label class="label-control font-weight-800 col-lg-4 text-center ">새로운 펌웨어버전</label>
+		</span>
+		<span class="row d-flex justify-content-center">
+			<input type="text" class="form-control col-lg-4" name="serial_fw_ver" id="id_server_fw_ver"/>
+		</span>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+$('#sub_dataTable').DataTable({
+	// order: [[0, 'desc']],
+	aaSorting: [],
+	ordering: false,
+	searching: false,
+	"lengthChange": false, 
+	language: {
+		url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Korean.json"
+	},
+	'columnDefs' : [
+		{
+			'targets' : 1
+			,'checkboxes' : {
+				'selectRow' : true
+			}
+		}
+	],
+	drawCallback: function (settings) {
+		$('#dataTable').css("display", "table");
+	}
+});
+	
+})
+
+</script>

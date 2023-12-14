@@ -1,0 +1,187 @@
+{% csrf_token %} 
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<!-- Agency -->
+ <div class="col-lg-12">
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >대리점명<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="대리점명을 입력하세요" 
+		id="{{ form.managed_name.name }}" 
+		name="{{ form.managed_name.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.managed_name.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >대리점코드</label>
+		<input class="form-control col-lg-3" 
+		placeholder="대리점코드을 입력하세요" 
+		id="{{ form.managed_code_shop.name }}" 
+		name="{{ form.managed_code_shop.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.managed_code_shop.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >상호(회사명)<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="상호(회사명)을 입력하세요" 
+		id="{{ form.company_name.name }}" 
+		name="{{ form.company_name.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.company_name.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >대표자명</label>
+		<input class="form-control col-lg-3" 
+		placeholder="대표자명을 입력하세요" 
+		id="{{ form.ceo_name.name }}" 
+		name="{{ form.ceo_name.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.ceo_name.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사업장 주소</label>
+		<input class="form-control col-lg-3" 
+		placeholder="사업장 주소을 입력하세요" 
+		id="{{ form.address.name }}" 
+		name="{{ form.address.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.address.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >사업장전화번호</label>
+		<input class="form-control col-lg-3" 
+		placeholder="사업장전화번호을 입력하세요" 
+		id="{{ form.tel.name }}" 
+		name="{{ form.tel.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.tel.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >담당자명<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="담당자명을 입력하세요" 
+		id="{{ form.manager_name.name }}" 
+		name="{{ form.manager_name.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.manager_name.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >담당자전화번호<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="담당자전화번호을 입력하세요" 
+		id="{{ form.manager_tel.name }}" 
+		name="{{ form.manager_tel.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.manager_tel.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+	<div class="form-group mt-2"> 
+		<div class="row d-flex flex-row align-items-baseline flex-nowrap">
+		<label class="control-label col-lg-3 mr-2 text-right" >담당자이메일<span class="text-danger">*</span></label>
+		<input class="form-control col-lg-3" 
+		placeholder="담당자이메일을 입력하세요" 
+		id="{{ form.manager_email.name }}" 
+		name="{{ form.manager_email.name }}" 
+		autocomplete="off" type="text" required />
+		{% for error in form.manager_email.errors %}
+		<div class="invalid-feedback ml-2" style="display:block;">
+			* {{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+    <div class="form-group mt-2"> 
+        <div class="row d-flex flex-row align-items-baseline flex-nowrap">
+        <label class="control-label col-lg-3 mr-2 text-right" for="{{ form.mstr_idx.id_for_label }}">마스터코드 선택</label>
+
+	<select class="form-control col-lg-3"  name="{{ form.mstr_idx.html_name }}" id="{{ form.mstr_idx.id_for_label }}">
+	{% for value, text in form.mstr_idx.field.choices %}
+			<option value="{{ value }}"{% if form.mstr_idx.value == value %} selected{% endif %}>{{ text }}</option>
+	{% endfor %}
+	</select>   
+
+	{% for error in form.mstr_idx.errors %}
+	<div class="invalid-feedback ml-2" style="display:block;">
+		* {{ error }}
+	</div>
+	{% endfor %}
+	</div>
+    </div>
+    
+    
+    
+    
+
+    
+    
+
+    
+	<input type="hidden" name="use_yn" value="Y">
+	<input type="hidden" name="agency_desc" value="">
+	<input type="hidden" name="{{form.managed_code_master.name }}" value="{{form.managed_code_master.value }}">
+	<input type="hidden" name="{{form.managed_code_shop.name }}" value="{{form.managed_code_shop.value }}">
+</div>
+
+
+</select>

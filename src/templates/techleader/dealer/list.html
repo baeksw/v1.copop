@@ -1,0 +1,32 @@
+<table class="table table-bordered table-hover" id="dataTable" style="display: block" width="100%" cellspacing="0">
+	<thead>
+		<tr>
+			<th>순번</th>
+			<th>대리점명</th>
+			<th>딜러코드</th>
+			<th>딜러명</th>
+			<th>연락처</th>
+			<th>이메일</th>
+			<th>등록자</th>
+			<th>등록일시</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for row in object_list %}
+	<tr rid="{{row.dealer_idx}}">
+		<td>{{ forloop.revcounter}}</td>
+		<td>{{ row.agency_idx.managed_name|default:"-" }}</td>
+		<td>{{ row.managed_code_dealer|default:"-" }}</td>
+		<td>{{ row.dealer_name|default:"-" }}</td>
+		<td>{{ row.dealer_mob|default:"-" }}</td>
+		<td>{{ row.dealer_email|default:"-" }}</td>
+		<td>{{ row.reg|default:"-" }}</td>
+		<td>{{ row.reg_dt}}</td>  
+	</tr>
+	{% empty %}
+	<tr>
+		<td colspan="9" class="text-center">데이터가 존재하지 않습니다.</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>

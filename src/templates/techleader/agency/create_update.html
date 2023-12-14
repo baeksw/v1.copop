@@ -1,0 +1,24 @@
+{% csrf_token %} 
+<!-- 
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+ -->
+
+<!-- Agency -->
+ <div class="col-lg-12">
+
+	{% include 'techleader/forms/input.html' with ls=3 cs=3 item=form.managed_name required=True %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=3 item=form.managed_code_shop_display readonly=True %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=3 item=form.company_name required=True %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=2 item=form.ceo_name required=True %}
+	{% include 'techleader/forms/input.html'  with item=form.address required=True ls='3' cs='4'  %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=3 item=form.tel required=True %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=2 item=form.manager_name required=True %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=3 item=form.manager_tel required=True %}
+	{% include 'techleader/forms/input.html' with ls=3 cs=3 item=form.manager_email required=True %}
+
+	{% include 'techleader/forms/hidden.html' with item=form.use_yn value='Y' %}
+	{% include 'techleader/forms/hidden.html' with item=form.desc  %}
+	{% include 'techleader/forms/hidden.html' with item=form.managed_code_master  %}
+	{% include 'techleader/forms/hidden.html' with item=form.managed_code_shop %}
+	{% include 'techleader/forms/hidden.html' with item=form.mstr_idx value=user.profile.mstr_idx.mstr_idx %}
+</div>

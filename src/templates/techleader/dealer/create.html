@@ -1,0 +1,42 @@
+{% csrf_token %} 
+
+
+<!-- Agency -->
+ <div class="col-lg-12">
+	{% include 'techleader/forms/input.html' with item=form.dealer_name required=True %}
+	{% include 'techleader/forms/select.html' with item=form.agency_idx %}
+	{% include 'techleader/forms/input.html' with item=form.dealer_code readonly=True %}
+	{% include 'techleader/forms/input.html' with item=form.dealer_mob required=True %}
+	{% include 'techleader/forms/input.html' with item=form.email required=True %}
+</div>
+
+<script>
+var current_agency_idx = '';
+
+function UpdateDealerCode(agency_idx) {
+	this.api = "{% url 'api.dealer.next' '000' %}";
+	this.api = this.api.replace('000', agency_idx);
+		
+	this.execute = function() {
+		$.getJSON(this.api, function(data){
+			console.log(data)
+			console.log(data.dealer_code)
+			$('#id_dealer_code').val(data.dealer_code);
+		})
+	}
+}
+
+$(document).ready(function(){
+	current_agency_idx = $('#id_agency_idx').val();
+	console.log(current_agency_idx );
+	var cmd = new UpdateDealerCode(current_agency_idx);
+	cmd.execute();
+	
+	$('#id_agency_idx').on('change', function(){
+		var idx = $(this).val();
+		var cmd = new UpdateDealerCode(idx);
+		cmd.execute();
+	})
+
+});
+</script>

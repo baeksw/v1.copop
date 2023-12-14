@@ -1,0 +1,21 @@
+<!-- UpdateModal -->
+<form class="form-horizontal" id="form_modal_UD" method="POST" >
+{% csrf_token %} 
+    <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered {{modal_size}} " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">{{ title }}</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body update-modal">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="id_delete" type="button" style="width: 88px; height: 44px; font-size: 14px;"><i class="fas fa-trash-alt mr-2"></i> 삭제</button>
+                    <button class="btn btn-outline-primary" id="charger" type="button" data-dismiss="modal" style="width: 88px; height: 44px; font-size: 14px;"><i class="fa fa-times mr-2"></i> 취소</button>
+                    <button class="btn btn-yellow" id="id_update" type="button" style="width: 88px; height: 44px; font-size: 14px;"><i class="far fa-edit mr-2"></i>수정</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

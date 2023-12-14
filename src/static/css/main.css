@@ -1,0 +1,34 @@
+@charset "utf-8";
+body { background:#e5e5e5 repeat; }
+/*body { background:#0057a6 repeat; }*/
+#loginBox { width:689px; margin:10% auto; font-family: 'Nanum Gothic', sans-serif; }
+#loginBox h1 { text-align:center; color:#65dbff; font-size:30px; }
+#loginBox h1 img { vertical-align:middle; }
+#loginBox h1 img.logo {margin-left: 40px; height: 60px; line-height: 60px;}
+#loginBox h1 img.title { height: 35px; line-height: 35px;  }
+/*#mainCon { margin-top:25px; background:#fff; border-radius:15px; height:203px; padding:20px 0 40px 0; overflow:hidden; box-shadow: 0 10px 20px 0 #3c4049;}*/
+/*#mainCon { margin-top:25px; background:#fff; border-radius:15px; height:303px; padding:20px 0 40px 0; overflow:hidden; box-shadow: 0 10px 20px 0 #3c4049; width: 400px; margin-left: 150px;}*/
+#mainCon h2 { float:left; margin-left:44px; width:153px; height:166px; }
+#mainCon img {margin: 35px 10px 25px 20px; max-width: 112px;}
+/*#mainCon ul { float:left; width:301px; margin-top:21px;}*/
+/*#mainCon ul { float:left; width:301px; margin-top:21px; margin-left: 50px;}*/
+#mainCon ul li { clear:both; height:48px; border:1px solid #959595; border-radius:7px;  }
+#mainCon ul li:first-child { margin-bottom:10px; background:url(../img/icon_id.gif) no-repeat 25px 15px; }
+#mainCon ul li:nth-child(2) { background:url(/static/img/icon_pw.gif) no-repeat 25px 15px; }
+#mainCon ul li+li { background:url(/static/img/icon_pw.gif) no-repeat 25px 15px; }
+#mainCon ul li input { border:none; border-left:1px solid #959595; height:29px; line-height:29px; margin:10px 0 0 72px; width:250px; padding-left:10px; font-size:15px; }
+#mainCon > p { float:left; margin:21px 0 0 20px;  }
+#mainCon div.type { clear:both; width:300px; margin:0 auto;}
+#mainCon div.type label{ margin: 0 10px;}
+#mainCon div.help { clear:both; width:589px; height:36px; margin:0 auto; border:1px solid #a1b3bf; background:#ebf6fc url(../img/icon_point.gif) no-repeat 11px 7px; overflow:hidden; }
+#mainCon div.help p {letter-spacing:-0.03em; font-family: 'Nanum Gothic', sans-serif; margin-left:42px; line-height:34px; font-size:12px; font-weight:bold; color:#5a5e61; }
+#mainCon div.help p span { color:#d12929; }
+
+#idPass input:focus{outline:1px solid blue;}
+
+#footer { margin:50px auto 0;  margin-left:80px; width:600px; overflow:hidden; font-family: 'Nanum Gothic', sans-serif; font-size: 12px;}
+#footer > p { float:left;  color:#286B9B; font-family: 'Nanum Gothic', sans-serif; }
+#footer > p > a { float:left;  color:#f4e729; font-family: 'Nanum Gothic', sans-serif; }
+#footer ul { float:right; width:500px; }
+#footer ul li { float:left; background:url(/static/img/bullet_footer.gif) no-repeat 0 5px; color:#fefefe; padding-left:9px; margin-right:8px; }
+#footer ul li.copyright { margin-left: 10px; clear:left; float:left; background:none; color:#fefefe; text-transform:uppercase; padding-left:0;}
